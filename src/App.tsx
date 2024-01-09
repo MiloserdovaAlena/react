@@ -1,42 +1,64 @@
-import React from 'react'; 
-import { Table } from 'antd'; 
- 
-function App() { 
-  interface IDataItem { 
-    key: string; 
-    name: string; 
-    age: number; 
-    address: string; 
-  } 
- 
- 
-  const dataSource: IDataItem[] = [ 
-    { key: '1', name: 'John Doe', age: 25, address: 'Street 123' }, 
-    { key: '2', name: 'Jane Smith', age: 30, address: 'Street 456' }, 
-    { key: '3', name: 'Alice Johnson', age: 28, address: 'Avenue 789' }, 
-    { key: '4', name: 'Bob Brown', age: 35, address: 'Road 321' }, 
-    { key: '5', name: 'Emily Davis', age: 22, address: 'Lane 654' }, 
-    { key: '6', name: 'Michael Wilson', age: 40, address: 'Boulevard 987' }, 
-    { key: '7', name: 'Sophia Lee', age: 27, address: 'Way 234' }, 
-    { key: '8', name: 'William Martinez', age: 33, address: 'Circle 567' }, 
-    { key: '9', name: 'Olivia Garcia', age: 29, address: 'Square 890' }, 
-    { key: '10', name: 'Daniel Rodriguez', age: 26, address: 'Park 432'}, 
-  ]; 
- 
-  const columns = [ 
-    { title: 'Name', dataIndex: 'name', key: 'name' }, 
-    { title: 'Age', dataIndex: 'age', key: 'age' }, 
-    { title: 'Address', dataIndex: 'address', key: 'address' }, 
-  ]; 
-  return ( 
-    <div> 
-      <Table<IDataItem> 
-        dataSource={dataSource} 
-        columns={columns} 
-      /> 
-    </div> 
-  ); 
- 
-} 
- 
-export default App;
+import React, { useState, useEffect } from 'react';
+import { Table, Button } from 'antd';
+import axios from 'axios';
+import type { ColumnsType } from 'antd/es/table';
+
+interface DataType {
+  country: string;
+  name: string;
+}
+
+const limit = 10;
+
+const columns: ColumnsType<DataType> = [
+  {
+    title: 'Страна',
+    dataIndex: 'country',
+    key: 'country',
+  },
+  {
+    title: 'Название школы',
+    dataIndex: 'name',
+    key: 'name',
+  },
+];
+
+const Root: React.FC = () => {
+  const [offset, setOffset] = useState<number>(0);
+  const [dataSource, setDataSource] = useState([]);
+
+  const getUniversity = async (offset: number, limit: number) => {
+    try {
+      const response = await axios.get(
+        `http://universities.hipolabs.com/search?offset=${offset*limit}&limit=${limit}`
+      );
+      console.log(response)
+      setDataSource(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    getUniversity(offset, limit);
+  }, [offset]);
+
+  return (
+    <>
+      <Table<DataType> dataSource={dataSource} columns={columns} pagination={false} />
+      <div className="wrapper">
+          <p>Текущая страница: {offset+1}</p>
+        <div>
+          <Button className='btn' onClick={() => setOffset(offset - 1)} disabled={!offset}>
+            Назад
+          </Button>
+          <Button className='btn' onClick={() => setOffset(offset + 1)}>
+            Вперед
+          </Button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Root;
