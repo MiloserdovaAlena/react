@@ -1,6 +1,7 @@
 import { ARTEM_ROUTE, ANNA_ROUTE, VALERA_ROUTE, TABLE_PAGINATION_ROUTE } from "../../app/routes/config";
 import { Link } from "react-router-dom";
 import { createContext, useState } from "react";
+import styled from "styled-components";
 
 interface AuthContextType {
   loginButtonText: string;
@@ -14,6 +15,31 @@ const defaultValue: AuthContextType = {
 
 const AuthContext = createContext<AuthContextType>(defaultValue);
 
+const NavbarWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f9f9f9;
+`;
+
+const NavbarLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 10px;
+`;
+
+const NavbarButton = styled.button`
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #f9f9f9;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+`;
+
 const Navbar: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const loginButtonText = isAuthenticated ? "Выйти" : "Войти";
@@ -22,29 +48,27 @@ const Navbar: React.FC = () => {
     setIsAuthenticated((prevState) => !prevState);
   };
   return (
-    <div>
+    <NavbarWrapper>
       <div>
-        <Link to={ARTEM_ROUTE} className="routeLink">
+        <NavbarLink to={ARTEM_ROUTE} className="routeLink">
           О нас
-        </Link>
-        <Link to={ANNA_ROUTE} className="routeLink">
+        </NavbarLink>
+        <NavbarLink to={ANNA_ROUTE} className="routeLink">
           Главная
-        </Link>
-        <Link to={VALERA_ROUTE} className="routeLink">
+        </NavbarLink>
+        <NavbarLink to={VALERA_ROUTE} className="routeLink">
           Каталог
-        </Link>
+        </NavbarLink>
         {isAuthenticated && (
-          <Link to={TABLE_PAGINATION_ROUTE} className="routeLink">
+          <NavbarLink to={TABLE_PAGINATION_ROUTE} className="routeLink">
             Отзывы
-          </Link>
+          </NavbarLink>
         )}
       </div>
       <AuthContext.Provider value={{ loginButtonText, toggleLogin }}>
-        <div>
-          <button onClick={toggleLogin}>{loginButtonText}</button>
-        </div>
+        <NavbarButton onClick={toggleLogin}>{loginButtonText}</NavbarButton>
       </AuthContext.Provider>
-    </div>
+    </NavbarWrapper>
   );
 };
 

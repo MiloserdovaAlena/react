@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Artem from "../../pages/Artem/Artem";
 import Valera from "../../pages/Valera/Valera";
