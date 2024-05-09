@@ -10,7 +10,9 @@ const CardStyled = styled.div`
   border-radius: 12px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
 
   &:hover {
     transform: translateY(-4px);

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Rings } from 'react-loader-spinner';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import { Rings } from "react-loader-spinner";
+import styled, { keyframes } from "styled-components";
 
 const fadeIn = keyframes`
   0% {

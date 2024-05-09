@@ -2,11 +2,7 @@ import React from "react";
 import DinamicPagination from "../../components/DinamicPagination";
 
 export const Artem = () => {
-
-    return (    
-        <DinamicPagination>  
-        </DinamicPagination>
-    )
-}
+  return <DinamicPagination></DinamicPagination>;
+};
 
 export default Artem;
