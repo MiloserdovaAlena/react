@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
-import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
-import MyDocument from '../../components/MyDocument';
+import { useState } from "react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { useForm } from "react-hook-form";
+import styled from "styled-components";
+import MyDocument from "../../components/MyDocument";
 
 interface IMyForm {
   picture: FileList;
@@ -54,7 +54,9 @@ const StyledDownloadLink = styled(PDFDownloadLink)`
   border-radius: 4px;
   margin-top: 20px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 
   &:hover {
     background-color: #4caf50;
@@ -66,7 +68,7 @@ const Anna = () => {
   const [task, setTasks] = useState<IMyForm | null>(null);
 
   const { register, handleSubmit } = useForm<IMyForm>({
-    mode: 'onBlur',
+    mode: "onBlur",
   });
 
   const MyForm = (data: IMyForm) => {
@@ -77,11 +79,11 @@ const Anna = () => {
     <>
       <StyledForm onSubmit={handleSubmit(MyForm)}>
         <StyledInput
-          {...register('name', {
-            required: 'Поле обязательно для заполнения',
+          {...register("name", {
+            required: "Поле обязательно для заполнения",
             minLength: {
               value: 5,
-              message: 'Нужно больше символов',
+              message: "Нужно больше символов",
             },
           })}
           placeholder="Enter name"
@@ -89,8 +91,8 @@ const Anna = () => {
         <StyledInput
           type="file"
           accept="image/*"
-          {...register('picture', {
-            required: 'Изображение',
+          {...register("picture", {
+            required: "Изображение",
           })}
         />
         <StyledButton type="submit">Сохранить</StyledButton>
@@ -99,12 +101,12 @@ const Anna = () => {
         <StyledDownloadLink document={<MyDocument name={task.name} picture={task.picture} />} fileName="lab_pdf.pdf">
           {({ loading, error }) => {
             try {
-              if (loading) return 'Loading document...';
-              if (error) throw new Error('Error generating document');
-              return 'Download now!';
+              if (loading) return "Loading document...";
+              if (error) throw new Error("Error generating document");
+              return "Download now!";
             } catch (error) {
-              console.error('PDF generation error:', error);
-              return 'Error generating PDF';
+              console.error("PDF generation error:", error);
+              return "Error generating PDF";
             }
           }}
         </StyledDownloadLink>

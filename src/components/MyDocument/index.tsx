@@ -1,5 +1,5 @@
-import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
+import React from "react";
+import { Page, Text, View, Document, StyleSheet, Image } from "@react-pdf/renderer";
 
 interface IDocumentProps {
   name: string;
@@ -16,9 +16,7 @@ const MyDocument: React.FC<IDocumentProps> = ({ name, picture }) => {
           <View style={styles.header}>
             <Text style={styles.title}>{name}</Text>
           </View>
-          <View style={styles.content}>
-            {pictureUrl && <Image src={pictureUrl} style={styles.image} />}
-          </View>
+          <View style={styles.content}>{pictureUrl && <Image src={pictureUrl} style={styles.image} />}</View>
         </View>
       </Page>
     </Document>
@@ -27,37 +25,37 @@ const MyDocument: React.FC<IDocumentProps> = ({ name, picture }) => {
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     padding: 24,
   },
   container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   header: {
-    backgroundColor: '#007bff',
-    width: '100%',
+    backgroundColor: "#007bff",
+    width: "100%",
     padding: 12,
     borderRadius: 8,
     marginBottom: 24,
   },
   title: {
-    color: '#ffffff',
+    color: "#ffffff",
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
   content: {
-    width: '100%',
-    backgroundColor: '#f2f2f2',
+    width: "100%",
+    backgroundColor: "#f2f2f2",
     padding: 12,
     borderRadius: 8,
   },
   image: {
-    width: '100%',
-    height: 'auto',
+    width: "100%",
+    height: "auto",
     borderRadius: 8,
   },
 });
