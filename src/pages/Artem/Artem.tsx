@@ -1,9 +1,11 @@
 import React from "react";
+import DinamicPagination from "../../components/DinamicPagination";
 
 export const Artem = () => {
 
     return (    
-    <>Я Artem</>
+        <DinamicPagination>  
+        </DinamicPagination>
     )
 }
 
