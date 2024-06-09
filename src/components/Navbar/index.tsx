@@ -20,6 +20,7 @@ const NavbarWrapper = styled.div`
   justify-content: space-between;
   padding: 20px;
   background-color: #f9f9f9;
+  align-items: baseline;
 `;
 
 const NavbarLink = styled(Link)`
@@ -28,6 +29,9 @@ const NavbarLink = styled(Link)`
   font-size: 20px;
   font-weight: 600;
   margin-right: 10px;
+  @media screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const NavbarButton = styled.button`
@@ -38,6 +42,9 @@ const NavbarButton = styled.button`
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const Navbar: React.FC = () => {

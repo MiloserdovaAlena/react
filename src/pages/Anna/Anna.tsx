@@ -18,6 +18,9 @@ const StyledForm = styled.form`
   background-color: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  @media screen and (max-width: 768px) {
+    margin-top: 20px;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -27,6 +30,9 @@ const StyledInput = styled.input`
   font-size: 16px;
   width: 100%;
   max-width: 300px;
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const StyledButton = styled.button`
@@ -38,7 +44,9 @@ const StyledButton = styled.button`
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
-
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
   &:hover {
     background-color: #45a049;
   }
