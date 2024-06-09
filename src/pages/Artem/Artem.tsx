@@ -1,7 +1,7 @@
 import DinamicPagination from "../../components/DinamicPagination";
 
 export const Artem = () => {
-  return <DinamicPagination></DinamicPagination>;
+  return <DinamicPagination />;
 };
 
 export default Artem;

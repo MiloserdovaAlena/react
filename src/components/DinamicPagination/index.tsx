@@ -5,7 +5,7 @@ import axios from "axios";
 import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
 
-const LIMIT_UNIVERSITIES = 15;
+const LIMIT_UNIVERSITIES = 10;
 
 const BlockObserver = styled.div`
   height: 60px;
@@ -18,7 +18,6 @@ const BlockObserver = styled.div`
   border-radius: 8px;
   margin-top: 20px;
 `;
-
 const DynamicPaginationContainer = styled.div`
   max-width: 900px;
   margin: 0 auto;
@@ -26,15 +25,16 @@ const DynamicPaginationContainer = styled.div`
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  @media screen and (max-width: 768px) {
+    max-width: 275px;
+  }
 `;
-
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 600;
   color: #333;
   margin-bottom: 20px;
 `;
-
 const LoadingText = styled.div`
   text-align: center;
   font-size: 16px;
@@ -47,14 +47,22 @@ const DynamicPagination: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const api_key = "G10HV4T-ATN4EVY-M2A74H4-N9DR5HJ";
+
   const fetchUniversities = async () => {
     try {
       setLoading(true);
-      const offset = (currentPage - 1) * LIMIT_UNIVERSITIES;
       const response = await axios.get(
-        `http://universities.hipolabs.com/search?offset=${offset}&limit=${LIMIT_UNIVERSITIES}`,
+        `https://api.kinopoisk.dev/v1.4/movie?page=${currentPage}&limit=${LIMIT_UNIVERSITIES}&selectFields=id&selectFields=name&selectFields=description&selectFields=poster&selectFields=backdrop&selectFields=logo&selectFields=top250&notNullFields=id&notNullFields=name&notNullFields=description&notNullFields=poster.url&notNullFields=backdrop.url&notNullFields=logo.url&notNullFields=top250&sortField=id&sortType=1&type=movie&status=`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": api_key,
+          },
+        },
       );
-      setUniversities((prev) => [...prev, ...response.data]);
+      setUniversities((prev) => [...prev, ...response.data.docs]);
     } catch (error) {
       console.log("Error fetching universities:", error);
     } finally {
@@ -78,7 +86,7 @@ const DynamicPagination: FC = () => {
 
   return (
     <DynamicPaginationContainer>
-      <Title>List Universities</Title>
+      <Title>Top 250 movie</Title>
       {universities.map((university) => (
         <CardUniversity data={university} key={university.name}></CardUniversity>
       ))}

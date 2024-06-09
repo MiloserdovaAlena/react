@@ -1,4 +1,9 @@
 export interface IUniversity {
-  country: string;
+  poster: {
+    url: string | undefined;
+    image: string;
+    previewUrl: string;
+  };
   name: string;
+  description: string;
 }
